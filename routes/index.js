@@ -30,6 +30,11 @@ router.route('/poll/:poll_id')
     .get(function(req, res, next){
         res.render("poll", req.poll)
     })
+    .post(function( req, res, next){
+        console.log(req.body);
+
+        res.render("done", req.poll)
+    })
 
 
 /* GET home page. */

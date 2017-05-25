@@ -9,7 +9,7 @@ block content
       ul
         each ans in answers
           li #{ans}
-            input(type="radio", name="answer" id=ans) 
+            input(type="radio", name="answer" value=ans) 
         else
           p No answers.
       input(type="submit")
