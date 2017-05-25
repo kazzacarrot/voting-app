@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1= title
+  
+  div 
+    h2 #{question}
+    form(method="post", action="")
+      ul
+        each ans in answers
+          li #{ans}
+            input(type="radio", name="answer" id=ans) 
+        else
+          p No answers.
+      input(type="submit")
