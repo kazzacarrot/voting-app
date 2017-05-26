@@ -8,8 +8,8 @@ block content
     form(method="post", action="")
       ul
         each ans in answers
-          li #{ans}
-            input(type="radio", name="answer" value=ans) 
+          li #{ans.text}
+            input(type="radio", name="answer" value=ans.text) 
         else
           p No answers.
       input(type="submit")
