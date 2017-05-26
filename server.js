@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus = require('stylus');
-var port = process.argv[2] || 8080;
+var port = process.env.PORT || 8080
 var index = require('./routes/index');
 var users = require('./routes/users');
 
