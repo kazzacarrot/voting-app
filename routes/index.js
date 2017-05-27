@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var PollHandler = require(process.cwd() + "/controllers/poll_handler.server.js");
 var mongo_uri = process.env.MONGOLAB_URI;
 var collection = "voting-app";
 var mongo = require("mongodb").MongoClient;
@@ -31,38 +31,19 @@ router.route('/poll/:poll_id')
     res.render("poll", req.poll)
 })
 .post(function( req, res, next){
-    console.log(req.body);
-    r = req.body;
-    answer = {
-        "text" : r["answer"]
-    }
-    if (answer.text === undefined){
-        res.render("error", {"message": "You have to pick one.", error: {status: "ain't no point if you don't pick one."}});
-    }
-    else{
-        console.log(answer);
-        mongo.connect(mongo_uri, function(err, db){
-            if (err) next(new Error("can't connect to mongo"));
+    mongo.connect(mongo_uri, function(err, db){
+        if (err) throw("can't connect to mongo");
 
-            query=    {
-                "_id":          req.poll._id,
-                "answers.text" : answer.text
-            }
-            console.log(query);
-            col = db.collection(collection);
-            col.findAndModify( query,
-                    [[    "_id", "asc" ]],
-                    {
-                        $inc: {"answers.$.count":1}
-                    },
-                    function(err, docs){
-                        if (err) console.error(err);
-                        console.log(docs);
-                        db.close(); 
-                        res.render("done", req.poll)
-                    })
-        })
-    }
+        console.log(req.body);
+        r = req.body;
+        answer = {
+            "text" : r["answer"]
+        }
+
+        pollHandler = new PollHandler(db, answer);
+        pollHandler.submitChoice(req, res, next);
+
+    })
 })
 
 
