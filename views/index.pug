@@ -2,4 +2,12 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+
+  
+  ul
+    each poll in polls
+      li #{poll.question}
+      a(href="/poll/" + poll.slug) Answer this poll.
+
+    else
+      li No Polls.

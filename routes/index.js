@@ -55,7 +55,14 @@ router.route('/poll/:poll_id')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+    mongo.connect(mongo_uri, function(err, db){
+        if (err) throw("can't connect to mongo");
+        
+
+        pollHandler = new PollHandler(db);
+        pollHandler.listPollsOnFrontPage(req, res, next);
+
+    })
 });
 
 module.exports = router;

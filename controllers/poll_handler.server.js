@@ -1,6 +1,14 @@
 var collection = "voting-app";
 
 function PollHandler(db){
+    this.listPollsOnFrontPage = function(req, res){
+
+        col = db.collection(collection);
+        col.find().toArray(function(err, docs){
+            res.render("index", {"polls": docs});
+        })
+    }
+
     this.newOption = function(req, res){
         console.log(req.body);
         r = req.body;
