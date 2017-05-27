@@ -14,24 +14,38 @@ function PollHandler(db){
             res.render("error", {"message": "Cannot create option with no text!", error: {status: "Don't be stupid, Stupid!"}});
         }
         else{
-            query=    {
-                "_id":          req.poll._id,
+            alreadyExists = false;
+            req.poll.answers.forEach(function(answer, answerindex) {
+                console.log(answer);
+                console.log(answerindex)
+                if (newChoice.text.toLowerCase() == answer.text.toLowerCase()){
+                    alreadyExists = true;
+                }
+
+            })
+            if (alreadyExists){
+                res.status(500).send("error: That option already exists!");
             }
-            col = db.collection(collection);
-            col.findAndModify( query,
-                    [[    "_id", "asc" ]],
-                    {
-                        $addToSet:
-                        {"answers" : newChoice }
-                    },{
-                        new:true,
-                    },
-                    function(err, docs){
-                        if (err) console.error(err);
-                        console.log(docs);
-                        db.close(); 
-                        res.render("done", docs)
-                    })
+            else {
+                query=    {
+                    "_id":          req.poll._id,
+                }
+                col = db.collection(collection);
+                col.findAndModify( query,
+                        [[    "_id", "asc" ]],
+                        {
+                            $addToSet:
+                            {"answers" : newChoice }
+                        },{
+                            new:true,
+                        },
+                        function(err, docs){
+                            if (err) console.error(err);
+                            console.log(docs);
+                            db.close(); 
+                            res.render("done", docs)
+                        })
+            }
         }
     }
 

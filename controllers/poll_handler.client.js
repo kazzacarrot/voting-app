@@ -11,10 +11,11 @@
                 alert("done");
                 window.location.href="";
             },
-            complete: function(e) {
-                console.log(e);
+            error: function(jqxhr, textStatus, errorThrown) {
+                alert(jqxhr.responseText);
             }
         })
     })
   })
+
 
