@@ -26,9 +26,9 @@ function PollHandler(db){
             req.poll.answers.forEach(function(answer, answerindex) {
                 console.log(answer);
                 console.log(answerindex)
-                if (newChoice.text.toLowerCase() == answer.text.toLowerCase()){
-                    alreadyExists = true;
-                }
+                    if (newChoice.text.toLowerCase() == answer.text.toLowerCase()){
+                        alreadyExists = true;
+                    }
 
             })
             if (alreadyExists){
