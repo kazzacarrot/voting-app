@@ -1,10 +1,18 @@
 var collection = "voting-app";
 
-function PollHandler(db, answer){
+function PollHandler(db){
+
     this.submitChoice = function(req, res){
+
+        console.log(req.body);
+        r = req.body;
+        answer = {
+            "text" : r["answer"]
+        }
         if (answer.text === undefined){
             res.render("error", {"message": "You have to pick one.", error: {status: "ain't no point if you don't pick one."}});
         }
+
         else{
             console.log(answer);
             query=    {

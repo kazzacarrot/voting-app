@@ -33,17 +33,13 @@ router.route('/poll/:poll_id')
 .post(function( req, res, next){
     mongo.connect(mongo_uri, function(err, db){
         if (err) throw("can't connect to mongo");
+        
 
-        console.log(req.body);
-        r = req.body;
-        answer = {
-            "text" : r["answer"]
-        }
-
-        pollHandler = new PollHandler(db, answer);
+        pollHandler = new PollHandler(db);
         pollHandler.submitChoice(req, res, next);
 
     })
+
 })
 
 
