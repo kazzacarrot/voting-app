@@ -20,10 +20,18 @@ router.param("poll_id", function(req, res, next, id, name){
             console.log(docs);
             if (err) next(new Error("unable to query"));
             req.poll = docs[0];
+            res.locals.poll = docs[0];
             next();
         })
     })
 })
+router.route("/results/:poll_id")
+.get(function(req, res, next){
+
+        pollHandler = new PollHandler();
+        pollHandler.barChart(req, res, next);
+})
+
 
 router.route("/new_poll")
 .get(function(req, res, next){
