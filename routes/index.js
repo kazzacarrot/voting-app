@@ -46,7 +46,7 @@ router.route('/poll/:poll_id')
 .post(function( req, res, next){
     mongo.connect(mongo_uri, function(err, db){
         if (err) throw("can't connect to mongo");
-        
+
 
         pollHandler = new PollHandler(db);
         pollHandler.submitChoice(req, res, next);
@@ -57,7 +57,7 @@ router.route('/poll/:poll_id')
 .put(function(req, res, next){
     mongo.connect(mongo_uri, function(err, db){
         if (err) throw("can't connect to mongo");
-        
+
 
         pollHandler = new PollHandler(db);
         pollHandler.newOption(req, res, next);
@@ -70,7 +70,7 @@ router.route('/poll/:poll_id')
 router.get('/', function(req, res, next) {
     mongo.connect(mongo_uri, function(err, db){
         if (err) throw("can't connect to mongo");
-        
+
 
         pollHandler = new PollHandler(db);
         pollHandler.listPollsOnFrontPage(req, res, next);
