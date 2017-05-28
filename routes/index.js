@@ -25,11 +25,15 @@ router.param("poll_id", function(req, res, next, id, name){
         })
     })
 })
+router.route("/chart_type/:poll_id")
+.get(function(req, res, next){
+    res.render("pick_chart_type")
+})
 router.route("/results/:poll_id")
 .get(function(req, res, next){
 
         pollHandler = new PollHandler();
-        pollHandler.barChart(req, res, next);
+        pollHandler.chart(req, res, next);
 })
 
 

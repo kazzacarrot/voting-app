@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1 Pick chart type
+    
+    h2 #{poll.question}
+
+    ul
+      li
+        a(href="/results/"+poll.slug + "?chart_type=bar") Bar graph
+      li
+        a(href="/results/"+poll.slug + "?chart_type=pie") Pie graph
+      li
+        a(href="/results/"+poll.slug + "?chart_type=doughnut") Doughnut graph
+      li
+        a(href="/results/"+poll.slug + "?chart_type=polarArea") Polar Area graph
+      li
+        a(href="/results/"+poll.slug + "?chart_type=radar") Radar graph
+      li
+        a(href="/results/"+poll.slug + "?chart_type=line") Line graph

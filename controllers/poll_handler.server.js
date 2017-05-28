@@ -2,9 +2,11 @@ var collection = "voting-app";
 
 function PollHandler(db){
 
-    this.barChart = function(req, res){
-        var colours = ["#69467a" , "#76467a" , "#7a4671" , "#7a4664" , "#7a4657" , "#7a464a"];
+    this.chart = function(req, res){
+        var type = req.query.chart_type || "bar";
+        var colours = ["#880d90", "#730b4c", "#900d5e", "#e71597", "#69467a" , "#76467a" , "#7a4671" , "#7a4664" , "#7a4657" , "#7a464a"];
         ret = {
+            chart_type: JSON.stringify(type),
             answer_types: JSON.stringify(req.poll.answers.map(function(a) {return a.text;})),
             answer_counts: JSON.stringify(req.poll.answers.map(function(a) {return a.count;})),
             answer_colours: JSON.stringify(colours.splice(0, req.poll.answers.length))

@@ -8,6 +8,8 @@ block content
     each poll in polls
       li #{poll.question}
       a(href="/poll/" + poll.slug) Answer this poll.
+      a(href="/chart_type/" + poll.slug) See results for this poll.
+   
 
     else
       li No Polls.
