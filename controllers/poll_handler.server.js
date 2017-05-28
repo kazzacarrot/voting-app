@@ -1,6 +1,34 @@
 var collection = "voting-app";
 
 function PollHandler(db){
+    
+    this.newPoll = function(req, res){
+
+        var col = db.collection(collection);
+        var slug = req.body.question.toLowerCase();
+        slug = slug.replace(/\s/g, "_");
+        slug = slug.replace("?", "");
+        ans = JSON.parse(JSON.stringify(req.body));
+        delete ans["question"];
+        var answers = []
+        Object.keys(ans).forEach(function(key, index){
+            answers.push({text: ans[key], count: 0 });
+        } )
+        poll = {
+            "question": req.body.question,
+            "slug": slug,
+            "answers": answers
+        }
+
+        console.log(poll);
+        col.insert(poll, function(err, doc){
+            res.redirect("/poll/" + slug);
+            db.close();
+
+        })
+
+    }
+
     this.listPollsOnFrontPage = function(req, res){
 
         col = db.collection(collection);

@@ -25,6 +25,19 @@ router.param("poll_id", function(req, res, next, id, name){
     })
 })
 
+router.route("/new_poll")
+.get(function(req, res, next){
+    res.render("new_poll")
+})
+.post(function(req, res, next){
+    console.log(req.body);
+    mongo.connect(mongo_uri, function(err, db){
+        if (err) throw("can't connect to mongo");
+
+        pollHandler = new PollHandler(db);
+        pollHandler.newPoll(req, res, next);
+    })
+})
 
 router.route('/poll/:poll_id')
 .get(function(req, res, next){

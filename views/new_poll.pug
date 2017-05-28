@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  
+  script(src="/controllers/add_remove_options.client.js")
+  h1 New Poll
+  form(action="", method="POST")
+    input(name="question", type="text", id="question")
+    fieldset
+      legend Answers
+      input(name="answer1", type="text")
+      button(type="button", onclick="add_option()") +
+      
+    input(type="submit")
