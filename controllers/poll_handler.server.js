@@ -28,6 +28,14 @@ function PollHandler(db){
         })
 
     }
+    this.deletePoll = function(req, res){
+        poll = req.poll;
+        col = db.collection(collection);
+        col.remove(poll, function(err, doc){ 
+            if (err) res.status(500).send(err);
+            else res.send("OK");
+        })
+    }
 
     this.listPollsOnFrontPage = function(req, res){
 

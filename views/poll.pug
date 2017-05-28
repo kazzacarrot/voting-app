@@ -11,7 +11,12 @@ block content
             input(type="radio", name="answer" value=ans.text) 
         else
           p No answers.
-      input(type="submit")
+      input(type="submit", class="btn btn-success")
     input(type="text", id="new_option_text")
     button(id="new_option") New
+   
+  div 
+    button(type="button", id="delete_poll", class="btn-danger btn") Delete Poll
+
+
   script(type="text/javascript" src="/controllers/poll_handler.client.js")

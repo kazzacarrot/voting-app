@@ -64,6 +64,17 @@ router.route('/poll/:poll_id')
 
     })
 })
+.delete(function(req, res, next){
+    mongo.connect(mongo_uri, function(err, db){
+        if (err) throw("can't connect to mongo");
+
+
+        pollHandler = new PollHandler(db);
+        pollHandler.deletePoll(req, res, next);
+
+    })
+})
+
 
 
 /* GET home page. */
